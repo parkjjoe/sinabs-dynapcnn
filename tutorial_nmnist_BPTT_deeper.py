@@ -1,13 +1,4 @@
-"""
-Quick Start With N-MNIST
 
-https://synsense.gitlab.io/sinabs-dynapcnn/getting_started/notebooks/nmnist_quick_start.html
-
-The summarized explanation is organized in Notion.
-"""
-#######################################################################################################
-# Data Preparation
-#######################################################################################################
 import time
 # Start to record inference time
 start_time = time.time()
