@@ -23,7 +23,7 @@ root_dir = "/home/parkjoe/PycharmProjects/sinabs-dynapcnn/datasets"
 cifar10_test_dataset = datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
 cnn_test_dataloader = DataLoader(cifar10_test_dataset, batch_size=batch_size, num_workers=num_workers, drop_last=True, shuffle=False)
 
-snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10_conversion_20240131_174228.pth")
+snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10_conversion_20240205_095621.pth")
 print(snn_convert)
 
 cpu_snn = snn_convert.to(device="cpu")
@@ -55,28 +55,26 @@ subset_indices = list(range(0, len(cifar10_test_dataset), 100)) # Use only 100 t
 #subset_indices = list(range(len(cifar10_test_dataset))) # Use all test images (10000)
 snn_test_dataset = Subset(cifar10_test_dataset, subset_indices)
 
-def cifar10_to_spike(tensor, time_window=100, max_rate=1.0):
+def cifar10_to_spike(data, n_time_steps=n_time_steps, max_rate=255):
     """
-    Convert CIFAR-10 images to spikes
+    Convert CIFAR-10 images to spike data
 
-    Args:
-        tensor (torch.Tensor): Input tensor (C, H, W) with values in [0, 1]
-        time_window (int): The number of time steps for spike encoding
-        max_rate (float): Maximum firing rate
+    Param:
+        data: CIFAR-10 image tensor (B x C x H x W)
+        n_time_steps: time steps of spike data
+        max_rate: a firing frequency of max spike
 
     Return:
-        torch.Tensor: Output spike tensor (T, C, H, W)
+        torch.Tensor: spike data (B x T x C x H x W)
     """
-    # Ensure tensor is in [0, 1]
-    tensor = torch.clamp(tensor ,0, 1)
+    # Convert pixel intensity to spike firing frequency
+    spike_rates = data.float() / max_rate
+    spike_rates = spike_rates.unsqueeze(2).repeat(1, 1, n_time_steps, 1, 1)
+    spike_rates = spike_rates.permute(0, 2, 1, 3, 4)
 
-    # Convert intensities to probabilities
-    probabilities = tensor * max_rate
-
-    # Generate spikes based on probabilities
-    spikes = torch.rand((time_window,) + tensor.shape) < probabilities.unsqueeze(0)
-
-    return spikes.float()
+    # Generate random spike
+    spikes = torch.rand_like(spike_rates) < spike_rates
+    return spikes
 
 inference_p_bar = tqdm(snn_test_dataset)
 
@@ -89,19 +87,19 @@ start_time = time.time()
 
 for data, label in inference_p_bar:
 
-    spikes = cifar10_to_spike(data.squeeze())
+    spike_data = cifar10_to_spike(data, n_time_steps=n_time_steps)
 
-    if torch.sum(spikes) == 0:
-        print("No spikes found in the data")
-        continue
+    # if torch.sum(spikes) == 0:
+    #     print("No spikes found in the data")
+    #     continue
 
     # Convert spike tensor to list of spike events
     spike_events = []
-    for t in range(spikes.size(0)):
-        for c in range(spikes.size(1)):
-            for y in range(spikes.size(2)):
-                for x in range(spikes.size(3)):
-                    if spikes[t, c, y, x] > 0:
+    for t in range(spike_data.size(1)):
+        for c in range(spike_data.size(2)):
+            for y in range(spike_data.size(3)):
+                for x in range(spike_data.size(4)):
+                    if spike_data[0, t, c, y, x] > 0:
                         spike = samna.speck2f.event.Spike()
                         spike.x = x
                         spike.y = y
@@ -110,9 +108,9 @@ for data, label in inference_p_bar:
                         spike.layer = 0
                         spike_events.append(spike)
 
-    if len(spike_events) == 0:
-        print("No spike events generated")
-        continue
+    # if len(spike_events) == 0:
+    #     print("No spike events generated")
+    #     continue
 
     # inference on chip
     # output_events is also a list of Spike, but each Spike.layer is 3, since layer#3 is the output layer

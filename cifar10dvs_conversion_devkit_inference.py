@@ -25,7 +25,7 @@ num_test = len(cifar10dvs) - num_train
 
 cifar10dvs_train_dataset, cifar10dvs_test_dataset = random_split(cifar10dvs, [num_train, num_test])
 
-snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10dvs_conversion_20240131_104147.pth")
+snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10dvs_conversion_20240201_175722.pth")
 # print(ann)
 # cnn = ann.to(device)
 # snn_convert = from_model(model=cnn, input_shape=(2, 128, 128), add_spiking_output=True, batch_size=batch_size).spiking_model

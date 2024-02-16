@@ -42,7 +42,7 @@ https://synsense.gitlab.io/sinabs-dynapcnn/getting_started/visualizer.html
 import os
 current_folder_path = str(os.path.join(os.getcwd()))
 file_tokens = current_folder_path.split("/")[:-3]
-params_path = os.path.join( os.path.join("/", *file_tokens), "/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/tutorial_nmnist_conversion_ann_deeper20240131_180023.pth")
+params_path = os.path.join( os.path.join("/", *file_tokens), "/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10dvs_conversion_ann_20240131_104147.pth")
 #icons_folder_path = os.path.join( os.path.join("/", *file_tokens), "examples/icons/")
 
 # Import requirements
@@ -96,7 +96,7 @@ ann = torch.load(params_path)
 # discretize = True: the model can be ported to the chip
 sinabs_model = from_model(ann, add_spiking_output=True, batch_size=1)
 
-input_shape = (2, 34, 34)
+input_shape = (2, 128, 128)
 hardware_compatible_model = DynapcnnNetwork(sinabs_model.spiking_model.cpu(), dvs_input=True, discretize=True, input_shape=input_shape)
 
 # Port the model to the chip

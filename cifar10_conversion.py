@@ -114,12 +114,12 @@ for e in range(epochs):
         print(f"Epoch {e} - accuracy: {correct_predictions.sum().item() / (len(correct_predictions)) * 100}%")
 #######################################################################################################
 # Convert CNN-To-SNN
-snn_convert = from_model(model=cnn, input_shape=(3, 32, 32), add_spiking_output=True, batch_size=batch_size).spiking_model
+snn_convert = from_model(model=cnn, input_shape=(3, 32, 32), add_spiking_output=True, synops=True, batch_size=batch_size).spiking_model
 print(snn_convert) # change ReLU to IAFSqueeze
 
 # Test Converted SNN
 # define a transform that accumulate the events into a raster-like tensor
-n_time_steps = 10
+n_time_steps = 100
 
 snn_convert = snn_convert.to(device)
 
