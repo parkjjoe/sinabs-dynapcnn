@@ -190,7 +190,7 @@ dynapcnn_net = DynapcnnNetwork(snn=snn, input_shape=input_shape, dvs_input=True)
 
 # 3.2 Create a devkit config based on the SNN
 dynapcnn_device_str = "speck2fdevkit:0"
-devkit_cfg = dynapcnn_net.make_config(device=dynapcnn_device_str, monitor_layers=["dvs"])
+devkit_cfg = dynapcnn_net.make_config(device=dynapcnn_device_str, monitor_layers=[-1])
 
 # 3.3 Construct a samna graph for power monitoring & visualization
 # get device name

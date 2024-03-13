@@ -1,32 +1,39 @@
-import torch
-import samna
+import datetime
+import os
 import time
-from torchvision import datasets, transforms
-from tqdm.notebook import tqdm
-from sinabs.backend.dynapcnn import DynapcnnNetwork
 from collections import Counter
-from torch.utils.data import Subset
-from torch.utils.data import DataLoader
+
+import samna
 #######################################################################################################
+import torch
+from sinabs.backend.dynapcnn import DynapcnnNetwork
+from tonic.datasets.nmnist import NMNIST
+from torch.utils.data import Subset
+from tqdm.notebook import tqdm
+
 # Depoly SNN To The Devkit
 #######################################################################################################
 n_time_steps = 100
 
 # cpu_snn = snn_convert.to(device="cpu")
-transform = transforms.Compose([transforms.ToTensor()])
-#transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 root_dir = "/home/parkjoe/PycharmProjects/sinabs-dynapcnn/datasets"
-cifar10_test_dataset = datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
 
-snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/cifar10_conversion_20240219_172045.pth")
+_ = NMNIST(save_to=root_dir, train=True)
+_ = NMNIST(save_to=root_dir, train=False)
+
+nmnist_train = NMNIST(save_to=root_dir, train=True)
+nmnist_test = NMNIST(save_to=root_dir, train=False)
+
+snn_convert = torch.load("/home/parkjoe/PycharmProjects/sinabs-dynapcnn/saved_models/tutorial_nmnist_conversion_deeper20240308_152441.pth")
 print(snn_convert)
 
+# cpu_snn = snn_convert.to(device="cpu")
 cpu_snn = snn_convert.to(device="cpu")
-dynapcnn = DynapcnnNetwork(snn=cpu_snn, input_shape=(3, 32, 32), discretize=True, dvs_input=False)
+dynapcnn = DynapcnnNetwork(snn=cpu_snn, input_shape=(2, 34, 34), discretize=True, dvs_input=True)
 devkit_name = "speck2fdevkit"
 
 # use the `to` method of DynapcnnNetwork to deploy the SNN to the devkit
-dynapcnn.to(device=devkit_name, chip_layers_ordering="auto")
+dynapcnn.to(device=devkit_name, chip_layers_ordering="auto", monitor_layers=[-1])
 print(f"The SNN is deployed on the core: {dynapcnn.chip_layers_ordering}")
 #######################################################################################################
 #devkit_cfg = dynapcnn.make_config(device=devkit_name, monitor_layers=["dvs"])
@@ -42,71 +49,44 @@ power_buffer_node = samna.BasicSinkNode_unifirm_modules_events_measurement()
 samna_graph = samna.graph.EventFilterGraph()
 samna_graph.sequential([power_source_node, power_buffer_node])
 samna_graph.start()
-power_monitor.start_auto_power_measurement(100) # 100 Hz sample rate
+power_monitor.start_auto_power_measurement(1) # 100 Hz sample rate
 #######################################################################################################
 # Inference On The Devkit
+snn_test_dataset = NMNIST(save_to=root_dir, train=False)
 # for time-saving, we only select a subset for on-chip infernce， here we select 1/100 for an example run
-subset_indices = list(range(0, len(cifar10_test_dataset), 100)) # Use only 100 test images
-#subset_indices = list(range(len(cifar10_test_dataset))) # Use all test images (10000)
-snn_test_dataset = Subset(cifar10_test_dataset, subset_indices)
-
-def cifar10_to_spike(data, n_time_steps=n_time_steps):
-    """
-    Convert CIFAR-10 images to spike data
-
-    Param:
-        data: CIFAR-10 image tensor (B x C x H x W)
-        n_time_steps: time steps of spike data
-
-    Return:
-        torch.Tensor: spike data (B x T x C x H x W)
-    """
-    # Convert pixel intensity to spike firing frequency
-    spike_rates = data.unsqueeze(1).repeat(1, n_time_steps, 1, 1, 1)
-
-    # Generate random spike
-    spikes = torch.rand_like(spike_rates) < spike_rates
-    return spikes
+subset_indices = list(range(0, len(snn_test_dataset), 100))
+#subset_indices = list(range(len(snn_test_dataset))) # all test data
+snn_test_dataset = Subset(snn_test_dataset, subset_indices)
 
 inference_p_bar = tqdm(snn_test_dataset)
 
 test_samples = 0
 correct_samples = 0
+total_input_spikes = 0
 total_output_spikes = 0
 
 # Start to record inference time
 start_time = time.time()
 
-for data, label in inference_p_bar:
+# for events, label in inference_p_bar:
+for events, label in inference_p_bar:
 
-    spike_data = cifar10_to_spike(data, n_time_steps=n_time_steps)
-
-    # if torch.sum(spikes) == 0:
-    #     print("No spikes found in the data")
-    #     continue
-
-    # Convert spike tensor to list of spike events
-    spike_events = []
-    for t in range(spike_data.size(1)):
-        for c in range(spike_data.size(2)):
-            for y in range(spike_data.size(3)):
-                for x in range(spike_data.size(4)):
-                    if spike_data[0, t, c, y, x] > 0:
-                        spike = samna.speck2f.event.Spike()
-                        spike.x = x
-                        spike.y = y
-                        spike.timestamp = t
-                        spike.feature = c
-                        spike.layer = 0
-                        spike_events.append(spike)
-
-    # if len(spike_events) == 0:
-    #     print("No spike events generated")
-    #     continue
+    # create samna Spike events stream
+    samna_event_stream = []
+    for ev in events:
+        spk = samna.speck2f.event.Spike()
+        spk.x = ev['x']
+        spk.y = ev['y']
+        spk.timestamp = ev['t'] - events['t'][0]
+        spk.feature = ev['p']
+        # Spikes will be sent to layer/core #0, since the SNN is deployed on core: [0, 1, 2, 3]
+        spk.layer = 0
+        samna_event_stream.append(spk)
 
     # inference on chip
     # output_events is also a list of Spike, but each Spike.layer is 3, since layer#3 is the output layer
-    output_events = dynapcnn(spike_events)
+    output_events = dynapcnn(samna_event_stream)
+    total_input_spikes += len(samna_event_stream)
     total_output_spikes += len(output_events)
 
     # use the most frequent output neruon index as the final prediction
@@ -123,12 +103,12 @@ for data, label in inference_p_bar:
 
     test_samples += 1
 
+print(f"Total input spikes: {total_input_spikes}")
 print(f"Total output spikes: {total_output_spikes}")
-print(f"On chip inference accuracy: {correct_samples / test_samples}")
+print(f"On chip inference accuracy: {correct_samples / test_samples:.4f}")
 
 # Stop to record inference time
 end_time = time.time()
-
 # Calculate total inference time
 total_inference_time = end_time - start_time
 print(f"Total inference time on hareware: {total_inference_time} seconds")

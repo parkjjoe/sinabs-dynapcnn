@@ -16,6 +16,7 @@ from torch.utils.data import Subset
 #######################################################################################################
 # Data Preparation
 #######################################################################################################
+#transform = transforms.Compose([transforms.ToTensor()])
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 root_dir = "/home/parkjoe/PycharmProjects/sinabs-dynapcnn/datasets"

@@ -49,7 +49,7 @@ input_shape = (1, 128, 128)
 dynapcnn = DynapcnnNetwork(snn=snn, input_shape=input_shape, dvs_input=True)
 
 # deploy to speck devkit, use a different name if you're using a different version of the devkit
-devkit_name = "speck2fmodule"
+devkit_name = "speck2fdevkit"
 dynapcnn.to(device=devkit_name, monitor_layers=["dvs", -1])
 
 # Utilize the DynapcnnVisualizer to visualize the DVS events.

@@ -106,8 +106,11 @@ samna_graph = samna.graph.EventFilterGraph()
 
 # init necessary nodes in samna graph
 # node for writing fake inputs into devkit
-input_buffer_node = samna.BasicSourceNode_speck2e_event_speck2e_input_event()
+#input_buffer_node = samna.BasicSourceNode_speck2e_event_speck2e_input_event()
+input_buffer_node = samna.BasicSourceNode_speck2f_event_input_event()
+
 # node for reading Spike(i.e. the output from last CNN layer)
+#spike_buffer_node = samna.BasicSinkNode_speck2e_event_output_event()
 spike_buffer_node = samna.BasicSinkNode_speck2f_event_output_event()
 
 

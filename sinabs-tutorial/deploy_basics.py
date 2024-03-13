@@ -103,7 +103,7 @@ ChipFactory.supported_devices
 #######################################################################################################
 # Porting model to device
 #######################################################################################################
-# Similar to portina a model to cpu with model.to("cpu") and GPU with model.to("cuda:0"),
+# Similar to porting a model to cpu with model.to("cpu") and GPU with model.to("cuda:0"),
 # you can also port your DynapcnnCompatibleModel to a chip with model.to("dynapcnndevkit:0").
 hw_model.to(
     device="dynapcnndevkit:0",
