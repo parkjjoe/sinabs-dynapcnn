@@ -319,11 +319,10 @@ time.sleep(0.1)
 print("Now you should see the input from the dvs sensor on the GUI window!" )
 
 # 3.6 Start to monitor dynamic power
-sample_rate = 100
-power_monitor.start_auto_power_measurement(sample_rate)
+power_monitor.start_auto_power_measurement(100) # sample_rate Hz
 
 print("Monitoring dynamic power...")
-time.sleep(5)
+time.sleep(5) # measure time
 power_monitor.stop_auto_power_measurement()
 samna_graph.stop()
 power_events = power_buffer_node.get_events()

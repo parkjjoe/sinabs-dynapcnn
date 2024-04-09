@@ -53,8 +53,8 @@ devkit.get_model().apply_configuration(samna_cfg)
 """
 2. We can use a more convenient API (recommended)
 """
-dynapcnn = DynapcnnNetwork(snn=SNN, input_shape=(1, 16, 16), dvs_input=False)
-dynapcnn.to(device="speck2fdevkit", monitor_layers=[0, 1, 2])
+# dynapcnn = DynapcnnNetwork(snn=SNN, input_shape=(1, 16, 16), dvs_input=False)
+# dynapcnn.to(device="speck2fdevkit", monitor_layers=[0, 1, 2])
 #######################################################################################################
 #######################################################################################################
 # How to Read The Vmem of the Neurons

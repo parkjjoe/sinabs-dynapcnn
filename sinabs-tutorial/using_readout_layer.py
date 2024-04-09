@@ -11,7 +11,6 @@ import samna
 import samnagui
 import time
 import random
-import copy
 import matplotlib.pyplot as plt
 
 from torch import nn
@@ -144,7 +143,7 @@ ________________________________________________________________________________
 readout_threshold = 1
 
 # init devkit config
-devkit_cfg = dynapcnn_net.make_config(device="speck2edevkit:0")
+devkit_cfg = dynapcnn_net.make_config(device="speck2fdevkit:0")
 
 # ========== modify devkit config ==========
 
@@ -187,13 +186,13 @@ samna_graph = samna.graph.EventFilterGraph()
 
 # init necessary nodes in samna graph
 # node for writing fake inputs into devkit
-input_buffer_node = samna.BasicSourceNode_speck2e_event_speck2e_input_event()
+input_buffer_node = samna.BasicSourceNode_speck2f_event_input_event()
 # node for reading ReadoutValue
-readout_value_buffer_node = samna.BasicSinkNode_speck2e_event_output_event()
+readout_value_buffer_node = samna.BasicSinkNode_speck2f_event_output_event()
 # node for reading ReadoutPinValue
-pin_value_buffer_node = samna.BasicSinkNode_speck2e_event_output_event()
+pin_value_buffer_node = samna.BasicSinkNode_speck2f_event_output_event()
 # node for reading Spike(i.e. the output from last CNN layer)
-spike_buffer_node = samna.BasicSinkNode_speck2e_event_output_event()
+spike_buffer_node = samna.BasicSinkNode_speck2f_event_output_event()
 
 # build input branch for graph
 samna_graph.sequential([input_buffer_node, devkit.get_model_sink_node()])
@@ -201,25 +200,25 @@ samna_graph.sequential([input_buffer_node, devkit.get_model_sink_node()])
 # build output branches for graph
 # branch #1: for the dvs input visualization
 _, _, streamer = samna_graph.sequential(
-    [devkit.get_model_source_node(), "Speck2eDvsToVizConverter", "VizEventStreamer"])
+    [devkit.get_model_source_node(), "Speck2fDvsToVizConverter", "VizEventStreamer"])
 # branch #2: for obtaining the ReadoutValue
 _, type_filter_node_readout, _ = samna_graph.sequential(
-    [devkit.get_model_source_node(), "Speck2eOutputEventTypeFilter", readout_value_buffer_node])
+    [devkit.get_model_source_node(), "Speck2fOutputEventTypeFilter", readout_value_buffer_node])
 # branch #3: for obtaining the ReadoutPinValue
 _, type_filter_node_pin, _ = samna_graph.sequential(
-    [devkit.get_model_source_node(), "Speck2eOutputEventTypeFilter", pin_value_buffer_node])
+    [devkit.get_model_source_node(), "Speck2fOutputEventTypeFilter", pin_value_buffer_node])
 # branch #4: for obtaining the output Spike from cnn output layer
 _, type_filter_node_spike, _ = samna_graph.sequential(
-    [devkit.get_model_source_node(), "Speck2eOutputEventTypeFilter", spike_buffer_node])
+    [devkit.get_model_source_node(), "Speck2fOutputEventTypeFilter", spike_buffer_node])
 
 # set the streamer nodes of the graph
 # tcp communication port for dvs input data visualization
 streamer_endpoint = 'tcp://0.0.0.0:40000'
 streamer.set_streamer_endpoint(streamer_endpoint)
 # add desired type for filter node
-type_filter_node_readout.set_desired_type("speck2e::event::ReadoutValue")
-type_filter_node_pin.set_desired_type("speck2e::event::ReadoutPinValue")
-type_filter_node_spike.set_desired_type("speck2e::event::Spike")
+type_filter_node_readout.set_desired_type("speck2f::event::ReadoutValue")
+type_filter_node_pin.set_desired_type("speck2f::event::ReadoutPinValue")
+type_filter_node_spike.set_desired_type("speck2f::event::Spike")
 
 # start samna graph before using the devkit
 samna_graph.start()
@@ -315,7 +314,7 @@ def create_fake_input_events(time_sec: int, data_rate: int = 1000):
     events = []
     for time_stamp in range(time_offset_micro_sec, time_micro_sec + time_offset_micro_sec + 1, time_stride):
 
-        spk = samna.speck2e.event.DvsEvent()
+        spk = samna.speck2f.event.DvsEvent()
         spk.timestamp = time_stamp
         spk.p = random.randint(0, 1)
         spk.x = random.randint(0, 15)
@@ -337,13 +336,12 @@ print(f"number of fake input spikes: {len(input_events)}")
 
 # estimated slow-clock cycle for processing the input spikes
 clock_cycles_esitmated = slow_clk_freq * input_time_length
-print(clock_cycles_esitmated)
-
+print(f"clock cycles estimated: {clock_cycles_esitmated}")
+#######################################################################################################
 # 4.2 Read the ReadoutPinValue
 # to read the ReadoutPinValue, we need to modify the devkit's readout layer's config a little bit
 devkit_cfg.readout.monitor_enable = False
 devkit_cfg.readout.readout_pin_monitor_enable = True
-
 
 # then apply the config to devkit
 devkit.get_model().apply_configuration(devkit_cfg)
@@ -392,67 +390,68 @@ ax.set_xlabel("time( micro sec)")
 ax.set_ylabel("neuron index")
 ax.set_title("ReadoutPinValue")
 ax.yaxis.set_major_locator(MaxNLocator(integer=True))  # make y-axis only show integer
-
-# 4.3 Read the ReadoutValue
-# to read the ReadoutValue, we need to modify the devkit's readout layer's config also
-
-# you can¡¯t monitor any Spike events from CNN layers or the DVS sensor anymore by setting
-# `readout.monitor_enable = True`
-devkit_cfg.readout.monitor_enable = True
-# disable ReadoutPinvalue reading
-devkit_cfg.readout.readout_pin_monitor_enable = False
-
-
-# then re-apply the config to devkit
-devkit.get_model().apply_configuration(devkit_cfg)
-time.sleep(0.1)
-# write the fake input into the devkit again
-
-# enable & reset the stop-watch of devkit, this is mainly for the timestamp processing for the input&output events.
-stop_watch = devkit.get_stop_watch()
-stop_watch.set_enable_value(True)
-stop_watch.reset()
-time.sleep(0.01)
-
-# clear output buffer
-readout_value_buffer_node.get_events()
-
-# write through the input buffer node
-input_time_length = (input_events[-1].timestamp - input_events[0].timestamp) / 1e6
-input_buffer_node.write(input_events)
-# sleep till all input events is sent and processed
-time.sleep(input_time_length + 0.02)
-
-# read the buffer immediately after the process waiting finished.
-# since every slock-clock cycle will append a new ReadoutValue event into the buffer
-readout_value_events = readout_value_buffer_node.get_events()
-
-print("You will not see any input events through the GUI window!")
-
-# the number of the ReadoutValue should be very close to (or the same as) the estimated clock cycle.
-print(f"The estimated clock cycle is {clock_cycles_esitmated}")
-print(f"Number of ReadoutValue events: {len(readout_value_events)}")
-
-# the ReadoutValue event don't have a timestamp, but we know it is generated at every slow-clock cycle
-time_each_clock_cycle = 1e6 / slow_clk_freq
-readout_value_timestamp = [idx * time_each_clock_cycle for idx in range(len(readout_value_events))]
-
-# shift timestep starting from 0
-start_t = readout_value_timestamp[0]
-readout_value_timestamp = [each - start_t for each in readout_value_timestamp]
-
-# get the index of the output neuron with maximum output
-neuron_id = [(each.value & 0x0F0000) >> 16  for each in readout_value_events]
-
-# plot the output neuron index vs. time
-fig, ax = plt.subplots()
-ax.scatter(readout_value_timestamp, neuron_id)
-ax.set(xlim=(0, 3e6),ylim=(0, 2.5))
-ax.set_xlabel("time( micro sec)")
-ax.set_ylabel("neuron index")
-ax.set_title("ReadoutValue")
-ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-
+plt.show()
+#######################################################################################################
+# # 4.3 Read the ReadoutValue
+# # to read the ReadoutValue, we need to modify the devkit's readout layer's config also
+#
+# # you can¡¯t monitor any Spike events from CNN layers or the DVS sensor anymore by setting
+# # `readout.monitor_enable = True`
+# devkit_cfg.readout.monitor_enable = True
+# # disable ReadoutPinvalue reading
+# devkit_cfg.readout.readout_pin_monitor_enable = False
+#
+# # then re-apply the config to devkit
+# devkit.get_model().apply_configuration(devkit_cfg)
+# time.sleep(0.1)
+# # write the fake input into the devkit again
+#
+# # enable & reset the stop-watch of devkit, this is mainly for the timestamp processing for the input&output events.
+# stop_watch = devkit.get_stop_watch()
+# stop_watch.set_enable_value(True)
+# stop_watch.reset()
+# time.sleep(0.01)
+#
+# # clear output buffer
+# readout_value_buffer_node.get_events()
+#
+# # write through the input buffer node
+# input_time_length = (input_events[-1].timestamp - input_events[0].timestamp) / 1e6
+# input_buffer_node.write(input_events)
+# # sleep till all input events is sent and processed
+# time.sleep(input_time_length + 0.02)
+#
+# # read the buffer immediately after the process waiting finished.
+# # since every slock-clock cycle will append a new ReadoutValue event into the buffer
+# readout_value_events = readout_value_buffer_node.get_events()
+#
+# print("You will not see any input events through the GUI window!")
+#
+# # the number of the ReadoutValue should be very close to (or the same as) the estimated clock cycle.
+# print(f"The estimated clock cycle is {clock_cycles_esitmated}")
+# print(f"Number of ReadoutValue events: {len(readout_value_events)}")
+#
+# # the ReadoutValue event don't have a timestamp, but we know it is generated at every slow-clock cycle
+# time_each_clock_cycle = 1e6 / slow_clk_freq
+# readout_value_timestamp = [idx * time_each_clock_cycle for idx in range(len(readout_value_events))]
+#
+# # shift timestep starting from 0
+# start_t = readout_value_timestamp[0]
+# readout_value_timestamp = [each - start_t for each in readout_value_timestamp]
+#
+# # get the index of the output neuron with maximum output
+# neuron_id = [(each.value & 0x0F0000) >> 16 for each in readout_value_events]
+#
+# # plot the output neuron index vs. time
+# fig, ax = plt.subplots()
+# ax.scatter(readout_value_timestamp, neuron_id)
+# ax.set(xlim=(0, 3e6),ylim=(0, 2.5))
+# ax.set_xlabel("time( micro sec)")
+# ax.set_ylabel("neuron index")
+# ax.set_title("ReadoutValue")
+# ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+# plt.show()
+#######################################################################################################
 # 4.4 Check the output from DynapCNN Layer
 # get the output events from last DynapCNN Layer
 dynapcnn_layer_events = spike_buffer_node.get_events()
@@ -461,6 +460,7 @@ dynapcnn_layer_events = spike_buffer_node.get_events()
 # since the input DVSEvents will be converted into Spikes and output from layer 13
 # so the Spikes from layer 13 is the input itself
 dynapcnn_layer_events = [each for each in dynapcnn_layer_events if each.layer != 13]
+print(dynapcnn_layer_events)
 
 print(f"number of output spikes from DynacpCNN Layer: {len(dynapcnn_layer_events)}")
 
@@ -482,6 +482,7 @@ ax.set_xlabel("time( micro sec)")
 ax.set_ylabel("neuron index")
 ax.set_title("Spike")
 ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+plt.show()
 
 # we should see the neuron index are 0 and 4 if using speck2e, because of the incorrect map relationship on speck2e devkit
 

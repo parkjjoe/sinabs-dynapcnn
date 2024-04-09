@@ -477,3 +477,225 @@
 [2024-03-12 17:45:25.705] [Speck2fBoards] [info] Speck 2f model initialized.
 [2024-03-12 17:45:25.706] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
 [2024-03-12 17:45:25.706] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:35691
+[2024-03-13 10:32:58.810] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 10:33:01.591] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 10:33:01.592] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 10:33:01.593] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:52037
+[2024-03-13 10:36:19.596] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 10:36:22.356] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 10:36:22.357] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 10:36:22.357] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:47945
+[2024-03-13 10:36:55.470] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 10:36:58.231] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 10:36:58.233] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 10:36:58.233] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:44329
+[2024-03-13 13:57:49.123] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 13:57:51.887] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 13:57:51.991] [Graph] [warning] Graph is destroyed without any start! Graph is required to start manually to work.
+[2024-03-13 14:29:49.032] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:29:51.803] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:29:51.908] [Graph] [warning] Graph is destroyed without any start! Graph is required to start manually to work.
+[2024-03-13 14:31:08.878] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:31:11.637] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:31:11.639] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:31:11.639] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:39229
+[2024-03-13 14:31:27.849] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 14:32:20.856] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:32:23.646] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:32:23.648] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:32:23.648] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:52215
+[2024-03-13 14:34:22.333] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:34:25.105] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:34:25.107] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:34:25.107] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:55113
+[2024-03-13 14:42:21.750] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:42:24.527] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:42:24.529] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:42:24.529] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:32929
+[2024-03-13 14:42:47.017] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 14:48:10.175] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:48:12.944] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:48:12.946] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:48:12.946] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:47931
+[2024-03-13 14:48:20.744] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 14:57:55.720] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:57:58.514] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:57:58.516] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:57:58.516] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:43415
+[2024-03-13 14:58:08.700] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 14:59:11.845] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:59:14.620] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:59:14.624] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:59:14.624] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:60043
+[2024-03-13 14:59:23.210] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 14:59:43.014] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 14:59:45.790] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 14:59:45.792] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 14:59:45.792] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40459
+[2024-03-13 14:59:52.050] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 15:00:51.446] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 15:00:54.211] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 15:00:54.213] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 15:00:54.213] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:33747
+[2024-03-13 15:02:23.720] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 15:02:26.496] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 15:02:26.498] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 15:02:26.498] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:44611
+[2024-03-13 15:27:32.380] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 15:27:35.148] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 15:27:35.149] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40000
+[2024-03-13 15:32:03.325] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 15:32:06.089] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 15:34:17.027] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 15:34:19.807] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 16:41:34.681] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 16:41:37.445] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-13 16:41:42.291] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:41851
+[2024-03-13 16:42:28.450] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-13 17:44:15.237] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 17:44:34.299] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-13 17:44:37.059] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:16:19.179] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:16:21.946] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:16:26.623] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:38939
+[2024-03-14 11:16:58.372] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:29:25.184] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:29:42.688] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:29:45.457] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:29:50.179] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:57159
+[2024-03-14 11:30:21.006] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:30:31.561] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:30:34.336] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:30:39.118] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:42065
+[2024-03-14 11:30:48.396] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:30:54.835] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:30:57.621] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:31:02.421] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:37361
+[2024-03-14 11:31:09.107] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:32:16.904] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:32:41.749] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:32:44.522] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:32:49.290] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:50183
+[2024-03-14 11:33:00.978] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:46:07.707] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:46:10.493] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:46:15.255] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:60539
+[2024-03-14 11:46:26.955] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:46:32.123] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:46:34.888] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:46:39.799] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:42709
+[2024-03-14 11:46:45.032] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:46:59.205] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:47:01.983] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:47:06.776] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:45497
+[2024-03-14 11:47:12.010] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:48:20.441] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:48:39.266] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:48:42.030] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:48:46.797] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:45735
+[2024-03-14 11:49:00.813] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 11:49:05.547] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 11:49:08.318] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 11:49:13.103] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:53951
+[2024-03-14 11:49:18.123] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:02:26.000] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:02:45.319] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:02:48.095] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:02:52.868] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:39587
+[2024-03-14 12:03:14.589] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:03:19.551] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:03:41.199] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:03:43.966] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:03:48.735] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:49519
+[2024-03-14 12:04:02.588] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:04:09.351] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:04:27.320] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:04:30.093] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:04:34.950] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:57023
+[2024-03-14 12:04:49.275] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:04:53.353] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:04:56.130] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:05:00.907] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:58199
+[2024-03-14 12:05:10.744] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:05:13.354] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:05:16.153] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:05:21.047] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:05:23.818] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:05:28.609] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:56491
+[2024-03-14 12:05:38.136] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:05:47.956] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:06:03.136] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:06:05.906] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:06:10.698] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:43421
+[2024-03-14 12:06:18.054] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 12:06:27.727] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 12:06:30.482] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 12:06:35.259] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:36171
+[2024-03-14 12:06:41.697] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:36:15.559] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:36:18.327] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:36:23.098] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:33339
+[2024-03-14 14:36:39.494] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:37:04.450] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:37:07.215] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:37:12.000] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:52211
+[2024-03-14 14:37:26.547] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:37:32.524] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:37:50.033] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:37:52.817] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:37:57.583] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:60817
+[2024-03-14 14:38:11.937] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:38:18.897] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:38:21.654] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:38:26.420] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:47235
+[2024-03-14 14:38:40.510] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:38:49.293] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:38:52.068] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:38:56.854] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:43547
+[2024-03-14 14:39:21.580] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:43:45.713] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:43:48.483] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:43:48.485] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:43:48.485] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:51005
+[2024-03-14 14:44:15.346] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:44:18.118] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:44:18.120] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:44:18.120] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:44281
+[2024-03-14 14:47:20.482] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:47:23.244] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:47:23.246] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:47:23.246] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:53227
+[2024-03-14 14:47:39.945] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:47:42.703] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:47:42.705] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:47:42.705] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:46829
+[2024-03-14 14:47:55.128] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:47:57.895] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:47:57.897] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:47:57.897] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:60853
+[2024-03-14 14:48:13.019] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:48:15.807] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:48:15.809] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:48:15.809] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:59897
+[2024-03-14 14:48:22.421] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 14:48:30.041] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:48:32.805] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:48:32.808] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:48:32.808] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:44911
+[2024-03-14 14:52:37.039] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:52:39.816] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:52:39.818] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:52:39.818] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:56999
+[2024-03-14 14:53:04.499] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:53:07.277] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:53:07.280] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:53:07.280] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:43295
+[2024-03-14 14:59:56.532] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 14:59:59.300] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 14:59:59.302] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 14:59:59.302] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:56155
+[2024-03-14 15:00:19.155] [Graph] [warning] Graph is destroyed while running! Note: Filter nodes constructed by `sequential` method won't work after corresponding graph is destroyed and please manually stop the graph after use.
+[2024-03-14 15:02:23.715] [Speck2fBoards] [info] Speck 2f dev kit initialized.
+[2024-03-14 15:02:26.475] [Speck2fBoards] [info] Speck 2f model initialized.
+[2024-03-14 15:02:26.476] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:40009
+[2024-03-14 15:02:26.477] [ZMQ] [info] ZMQPublisher set endpoint: tcp://0.0.0.0:59709

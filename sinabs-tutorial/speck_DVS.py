@@ -9,6 +9,10 @@ By modifying the hardware configuration object, the "DVS Layer/Pre-Processing La
     Polarity Merging, Pooling, Cropping, Mirroring, Switching ON/OFF Polarity, Hot-Pixel Filtering, Output Destination Layer Selecting, etc.
     (Output Destination Layer Selecting: The DVS layer also 2 output destination layers.)
 """
+from torch import nn
+from sinabs.layers import IAFSqueeze
+from sinabs.backend.dynapcnn.dynapcnn_visualizer import DynapcnnVisualizer
+from sinabs.backend.dynapcnn import DynapcnnNetwork
 #######################################################################################################
 # Monitor DVS Events
 #######################################################################################################
@@ -32,11 +36,6 @@ By modifying the hardware configuration object, the "DVS Layer/Pre-Processing La
 #   1. set the input_shape argument as input_shape=(1, xx, xx) when init the DynapcnnNetwork.
 #   2. manually modify the hardware configuration smana.speckxx.configuration.SpeckConfiguration.dvs_layer.merge = True
 #       before it is applied to the devkit.
-from torch import nn
-from sinabs.layers import IAFSqueeze
-from sinabs.backend.dynapcnn.dynapcnn_visualizer import DynapcnnVisualizer
-from sinabs.backend.dynapcnn import DynapcnnNetwork
-
 
 # create a dummy snn for DynapcnnNetwork initialization
 snn = nn.Sequential(
@@ -59,14 +58,7 @@ dynapcnn.to(device=devkit_name, monitor_layers=["dvs", -1])
 
 # Please do not close the visualizer when running this notebook. Once the visualizer is closed, try to resetart the notebook.
 
-visualizer = DynapcnnVisualizer(
-    window_scale=(4, 8),
-    dvs_shape=(128, 128),
-    add_power_monitor_plot=True,
-    spike_collection_interval=1000,  # milii-second
-)
 
-visualizer.connect(dynapcnn_network=dynapcnn)
 #######################################################################################################
 # Not Merge Polarity
 #######################################################################################################
@@ -83,6 +75,8 @@ devkit_cfg_bi_polarity = DynapcnnNetwork(snn=snn, input_shape=input_shape, dvs_i
 
 # update the configuration
 dynapcnn.samna_device.get_model().apply_configuration(devkit_cfg_bi_polarity)
+
+
 #######################################################################################################
 # Pooling
 #######################################################################################################
@@ -107,6 +101,14 @@ devkit_cfg_pool = DynapcnnNetwork(snn=snn, input_shape=input_shape, dvs_input=Tr
 dynapcnn.samna_device.get_model().apply_configuration(devkit_cfg_pool)
 
 # Users should observe that the visualizer¡¯s ¡°Dvs Plot¡± window is resized by enabling pooling functionality.
+visualizer = DynapcnnVisualizer(
+    window_scale=(4, 8),
+    dvs_shape=(128, 128),
+    add_power_monitor_plot=True,
+    #spike_collection_interval=1000,  # milli-second
+)
+
+visualizer.connect(dynapcnn_network=dynapcnn)
 #######################################################################################################
 # Cropping
 #######################################################################################################

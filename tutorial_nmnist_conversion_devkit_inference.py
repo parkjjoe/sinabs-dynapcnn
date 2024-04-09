@@ -49,7 +49,7 @@ power_buffer_node = samna.BasicSinkNode_unifirm_modules_events_measurement()
 samna_graph = samna.graph.EventFilterGraph()
 samna_graph.sequential([power_source_node, power_buffer_node])
 samna_graph.start()
-power_monitor.start_auto_power_measurement(1) # 100 Hz sample rate
+power_monitor.start_auto_power_measurement(100) # 100 Hz sample rate
 #######################################################################################################
 # Inference On The Devkit
 snn_test_dataset = NMNIST(save_to=root_dir, train=False)

@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import samna
 import samnagui
 import torch
+from tonic.datasets.nmnist import NMNIST
 from sinabs.from_torch import from_model
 from sinabs.layers.pool2d import SumPool2d
 from torch import nn
@@ -59,6 +60,7 @@ snn = from_model(cnn, input_shape=input_shape, batch_size=1).spiking_model
 # snn to DynapcnnNetwork
 dynapcnn_net = DynapcnnNetwork(snn=snn, input_shape=input_shape, dvs_input=False)
 #######################################################################################################
+#######################################################################################################
 # 2. Prepare for deployment
 #######################################################################################################
 # 3 parts need to set up to deploy the SNN to the devkit:
@@ -82,7 +84,6 @@ devkit_cfg = dynapcnn_net.make_config(device="speck2fdevkit:0")
 cnn_output_layer = dynapcnn_net.chip_layers_ordering[-1]
 devkit_cfg.cnn_layers[cnn_output_layer].monitor_enable = True
 
-
 """dvs layer configuration"""
 # link the dvs layer to the 1st layer of the cnn layers
 devkit_cfg.dvs_layer.destinations[0].enable = True
@@ -103,7 +104,6 @@ devkit = samna.device.open_device(device_names[0])
 # init the graph
 samna_graph = samna.graph.EventFilterGraph()
 
-
 # init necessary nodes in samna graph
 # node for writing fake inputs into devkit
 #input_buffer_node = samna.BasicSourceNode_speck2e_event_speck2e_input_event()
@@ -112,7 +112,6 @@ input_buffer_node = samna.BasicSourceNode_speck2f_event_input_event()
 # node for reading Spike(i.e. the output from last CNN layer)
 #spike_buffer_node = samna.BasicSinkNode_speck2e_event_output_event()
 spike_buffer_node = samna.BasicSinkNode_speck2f_event_output_event()
-
 
 # build input branch for graph
 samna_graph.sequential([input_buffer_node, devkit.get_model_sink_node()])
@@ -128,7 +127,6 @@ _, spike_collection_filter, spike_count_filter, _ = samna_graph.sequential(
 _, type_filter_node_spike, _ = samna_graph.sequential(
     [devkit.get_model_source_node(), "Speck2fOutputEventTypeFilter", spike_buffer_node])
 
-
 # set the streamer nodes of the graph
 # tcp communication port for dvs input data visualization
 streamer_endpoint = 'tcp://0.0.0.0:40009'
@@ -136,12 +134,11 @@ streamer.set_streamer_endpoint(streamer_endpoint)
 # add desired type for filter node
 type_filter_node_spike.set_desired_type("speck2f::event::Spike")
 # add configurations for spike collection and counting filters
-time_interval = 50
+time_interval = 100
 labels = ["0", "1"]  # a list that contains the names of output classes
 num_of_classes = len(labels)
 spike_collection_filter.set_interval_milli_sec(time_interval)  # divide according to this time period in milliseconds.
 spike_count_filter.set_feature_count(num_of_classes)  # number of output classes
-
 
 # start samna graph before using the devkit
 samna_graph.start()
@@ -219,7 +216,6 @@ print("now you should see a change on the GUI window!")
 #######################################################################################################
 # 3.1 Create fake input for devkit
 def create_fake_input_events(time_sec: int, data_rate: int = 1000):
-
     """
     Args:
         time_sec: how long is the input events
@@ -232,7 +228,6 @@ def create_fake_input_events(time_sec: int, data_rate: int = 1000):
         half region of the input feature map.
 
     """
-
     time_offset_micro_sec = 5000  # make the timestamp start from 5000
     time_micro_sec = time_sec * 1000000  # timestamp unit is micro-second
     time_stride = 1000000 // data_rate
@@ -256,7 +251,7 @@ def create_fake_input_events(time_sec: int, data_rate: int = 1000):
 
     return events
 # create fake input events
-input_time_length = 5 # seconds
+input_time_length = 10 # seconds
 data_rate = 5000
 input_events = create_fake_input_events(time_sec=input_time_length, data_rate=data_rate)
 
@@ -301,7 +296,6 @@ spike_timestamp = [each - start_t for each in spike_timestamp]
 # get the neuron index of each output spike
 neuron_id = [each.feature  for each in dynapcnn_layer_events]
 
-
 # plot the output neuron index vs. time
 fig, ax = plt.subplots()
 ax.scatter(spike_timestamp, neuron_id)
@@ -311,7 +305,6 @@ ax.set_ylabel("neuron index")
 ax.set_title("OutputSpike")
 
 # stop devkit when experiment finished.
-
 gui_process.terminate()
 gui_process.join()
 
